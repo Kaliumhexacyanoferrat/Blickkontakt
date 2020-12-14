@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\eye.png" />
+    <None Remove="Resources\user.png" />
+    <None Remove="Schema\V1_0_0_0__Baseline.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Schema\V1_0_0_0__Baseline.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\eye.png" />
+    <EmbeddedResource Include="Resources\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    
+    <PackageReference Include="Evolve" Version="2.4.0" />
+    
+    <PackageReference Include="GenHTTP.Core" Version="5.1.1" />
+    <PackageReference Include="GenHTTP.Modules.Authentication" Version="5.1.0" />
+    <PackageReference Include="GenHTTP.Modules.Controllers" Version="5.1.0" />
+    <PackageReference Include="GenHTTP.Modules.Practices" Version="5.1.0" />
+    <PackageReference Include="GenHTTP.Modules.Razor" Version="5.1.0" />
+    <PackageReference Include="GenHTTP.Modules.Websites" Version="5.1.0" />
+    <PackageReference Include="GenHTTP.Themes.AdminLTE" Version="5.1.0" />
+    
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.1" />
+    
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\" />
+  </ItemGroup>
+
+</Project>
