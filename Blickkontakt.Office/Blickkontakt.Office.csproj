@@ -15,9 +15,14 @@
     <None Remove="Resources\eye.png" />
     <None Remove="Resources\user.png" />
     <None Remove="Schema\V1_0_0_0__Baseline.sql" />
+    <None Remove="Schema\V1_0_0_1__Customers.sql" />
+    <None Remove="Views\CustomerList.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Schema\V1_0_0_1__Customers.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Schema\V1_0_0_0__Baseline.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -26,6 +31,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\eye.png" />
     <EmbeddedResource Include="Resources\user.png" />
+    <EmbeddedResource Include="Views\CustomerList.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,7 +52,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>

@@ -43,6 +43,8 @@ namespace Blickkontakt.Office.Model
 
         public DbSet<Account> Users { get; set; }
 
+        public DbSet<Customer> Customers { get; set; }
+
         #endregion
 
 
