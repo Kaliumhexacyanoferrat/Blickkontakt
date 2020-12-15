@@ -5,7 +5,6 @@ services:
   db:
     image: postgres
     restart: always
-    hostname: blickkontakt-db
     environment:
       POSTGRES_USER: blickkontakt
       POSTGRES_PASSWORD: blickkontakt
@@ -16,9 +15,8 @@ services:
       
   blickkontakt:
     image: blickkontakt
-    restart: always
     environment:
-      BLICKKONTAKT_DB_HOST: blickkontakt-db
+      BLICKKONTAKT_DB_HOST: db
     ports:
       - 8081:8080
   
