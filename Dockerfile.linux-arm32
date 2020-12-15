@@ -1,0 +1,19 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+WORKDIR /source
+
+# copy csproj and restore as distinct layers
+COPY Blickkontakt.Office/*.csproj .
+RUN dotnet restore -r linux-arm
+
+# copy and publish app and libraries
+COPY Blickkontakt.Office/ .
+RUN dotnet publish -c release -o /app -r linux-arm --no-restore /p:PublishTrimmed=true
+
+# final stage/image
+FROM mcr.microsoft.com/dotnet/runtime-deps:5.0-buster-slim-arm32v7
+WORKDIR /app
+COPY --from=build /app .
+
+ENTRYPOINT ["./Blickkontakt.Office"]
+
+EXPOSE 8080

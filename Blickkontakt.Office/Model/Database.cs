@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace Blickkontakt.Office.Model
 {
@@ -13,7 +15,12 @@ namespace Blickkontakt.Office.Model
         {
             get
             {
-                return "Server=localhost;Database=blickkontakt;User Id=blickkontakt;Password=blickkontakt";
+                var server = Environment.GetEnvironmentVariable("BLICKKONTAKT_DB_HOST") ?? "localhost";
+                var db = Environment.GetEnvironmentVariable("BLICKKONTAKT_DB_DATABASE") ?? "blickkontakt";
+                var user = Environment.GetEnvironmentVariable("BLICKKONTAKT_DB_USER") ?? "blickkontakt";
+                var password = Environment.GetEnvironmentVariable("BLICKKONTAKT_DB_PASSWORD") ?? "blickkontakt";
+
+                return $"Server={server};Database={db};User Id={user};Password={password}";
             }
         }
 

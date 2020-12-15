@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    hostname: blickkontakt-db
+    environment:
+      POSTGRES_USER: blickkontakt
+      POSTGRES_PASSWORD: blickkontakt
+    volumes:
+      - /data/docker/blickkontakt/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+      
+  blickkontakt:
+    image: blickkontakt
+    restart: always
+    environment:
+      BLICKKONTAKT_DB_HOST: blickkontakt-db
+    ports:
+      - 8081:8080
+  
