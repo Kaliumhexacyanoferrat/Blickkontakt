@@ -1,0 +1,160 @@
+﻿<section class="content">
+
+    <form novalidate="novalidate" id="editor" method="post" action=".">
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h3 class="card-title">Stammdaten</h3>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                            <label for="number" class="col-sm-2 col-form-label">Nummer</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="number" name="number" value="@Model.Data.Number">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="@Model.Data.Name">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="firstName" class="col-sm-2 col-form-label">Vorname</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Vorname" value="@Model.Data.FirstName">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="mail" class="col-sm-2 col-form-label">E-Mail</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="mail" name="mail" placeholder="vorname.nachname@gmail.com" value="@Model.Data.Mail">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="phone" class="col-sm-2 col-form-label">Telefon</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="07171 75849" value="@Model.Data.Phone">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h3 class="card-title">Adresse</h3>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                            <label for="street" class="col-sm-2 col-form-label">Straße</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="street" name="street" placeholder="Vogelesweg 9" value="@Model.Data.Street">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="zip" class="col-sm-2 col-form-label">PLZ</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="zip" name="zip" placeholder="73525" value="@Model.Data.Zip">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="city" class="col-sm-2 col-form-label">Ort</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="city" name="city" placeholder="Schwäbisch Gmünd" value="@Model.Data.City">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="row justify-content-end">
+
+            <div class="col-2">
+                <button class="btn btn-block btn-primary">Speichern</button>
+            </div>
+
+            <div class="col-2">
+                <a href="../../details/@Model.Data.Number/" class="btn btn-block btn-outline-primary">Abbrechen</a>
+            </div>
+
+        </div>
+
+    </form>
+
+</section>
+
+<script>
+
+    window.addEventListener("load", function() {
+
+        $('#editor').validate({
+            rules: {
+                number: {
+                    required: true,
+                    digits: true
+                },
+                name: {
+                    required: true
+                },
+                mail: {
+                    required: false,
+                    email: true
+                }
+            },
+            messages: {
+                number: {
+                    required: "Kundennummern können nicht automatisch neu vergeben werden. Bitte geben Sie eine Kundennummer ein.",
+                    digits: "Der eingegebene Wert muss eine Zahl sein"
+                },
+                name: {
+                    required: "Bitte geben Sie den Namen des Kunden oder der Organisation ein"
+                },
+                mail: {
+                    email: "Bitte geben Sie eine gültige E-Mail-Adresse ein"
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.col-sm-10').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+
+    });
+
+</script>

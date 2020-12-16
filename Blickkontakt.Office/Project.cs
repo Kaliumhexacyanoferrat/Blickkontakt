@@ -36,12 +36,23 @@ namespace Blickkontakt.Office
                                 .Fallback(Controller.From<DashboardController>())
                                 .AddController<CustomerController>("customers")
                                 .AddController<AnnounceController>("announces")
+                                .AddController<LetterController>("letters")
+                                .AddController<AccountController>("accounts")
                                 .Add("static", resources)
                                 .Authentication(auth);
 
+            var menu = Menu.Empty()
+                           .Add("{website}", "Übersicht")
+                           .Add("/customers/", "Kunden")
+                           .Add("/announces/", "Anzeigen")
+                           .Add("/letters/", "Infobrief")
+                           .Add("/accounts/", "Mitarbeiter");
+
             return Website.Create()
                           .Theme(theme)
-                          .Content(content);
+                          .Content(content)
+                          .Menu(menu)
+                          .AddScript("jquery-validate.js", Resource.FromAssembly("jquery.validate.min.js"));
         }
 
         private static UserProfile? RenderUser(IRequest request, IHandler handler)

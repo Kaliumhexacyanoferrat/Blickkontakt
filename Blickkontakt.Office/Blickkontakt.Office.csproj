@@ -15,14 +15,14 @@
     <None Remove="Resources\eye.png" />
     <None Remove="Resources\user.png" />
     <None Remove="Schema\V1_0_0_0__Baseline.sql" />
-    <None Remove="Schema\V1_0_0_1__Customers.sql" />
+    <None Remove="Scripts\jquery.validate.min.js" />
     <None Remove="Views\CustomerList.cshtml" />
+    <None Remove="Views\Customer\Creation.cshtml" />
+    <None Remove="Views\Customer\Details.cshtml" />
+    <None Remove="Views\Customer\Editor.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Schema\V1_0_0_1__Customers.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Schema\V1_0_0_0__Baseline.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -31,7 +31,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\eye.png" />
     <EmbeddedResource Include="Resources\user.png" />
-    <EmbeddedResource Include="Views\CustomerList.cshtml" />
+    <EmbeddedResource Include="Scripts\jquery.validate.min.js" />
+    <EmbeddedResource Include="Views\Customer\Editor.cshtml" />
+    <EmbeddedResource Include="Views\Customer\Details.cshtml" />
+    <EmbeddedResource Include="Views\Customer\Creation.cshtml" />
+    <EmbeddedResource Include="Views\Customer\List.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,10 +53,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.1" />
     
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>

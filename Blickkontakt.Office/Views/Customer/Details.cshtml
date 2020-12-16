@@ -1,0 +1,113 @@
+﻿<section class="content">
+
+
+    <div class="row justify-content-end">
+
+        <div class="col-2">
+            <a href="../../edit/@Model.Data.Number/" class="btn btn-block btn-outline-primary">Bearbeiten</a>
+        </div>
+
+        <div class="col-2">
+            <a href="../../delete/@Model.Data.Number/" class="btn btn-block btn-outline-danger">Löschen</a>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="card">
+
+                <div class="card-header">
+                    <h3 class="card-title">Stammdaten</h3>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="form-group row">
+                        <label for="number" class="col-sm-2 col-form-label">Nummer</label>
+                        <div class="col-sm-10 form-control" id="number">@Model.Data.Number</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10 form-control" id="name">@Model.Data.Name</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="firstName" class="col-sm-2 col-form-label">Vorname</label>
+                        <div class="col-sm-10 form-control" id="firstName">@Model.Data.FirstName</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="mail" class="col-sm-2 col-form-label">E-Mail</label>
+                        <div class="col-sm-10 form-control" id="mail">@Model.Data.Mail</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="phone" class="col-sm-2 col-form-label">Telefon</label>
+                        <div class="col-sm-10 form-control" id="phone">@Model.Data.Phone</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="card">
+
+                <div class="card-header">
+                    <h3 class="card-title">Adresse</h3>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="form-group row">
+                        <label for="street" class="col-sm-2 col-form-label">Straße</label>
+                        <div class="col-sm-10 form-control" id="street">@Model.Data.Street</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="zip" class="col-sm-2 col-form-label">PLZ</label>
+                        <div class="col-sm-10 form-control" id="zip">@Model.Data.Zip</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="city" class="col-sm-2 col-form-label">Ort</label>
+                        <div class="col-sm-10 form-control" id="city">@Model.Data.City</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Karte</label>
+                        <div class="col-sm-10">
+                            <iframe width="100%" height="300" frameborder="0" scrolling="no"
+                                    marginheight="0" marginwidth="0"
+                                    src="https://maps.google.com/maps?q=@(Model.Data.Street),%20@(Model.Data.Zip)%20@(Model.Data.City)&output=embed"></iframe>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+
+    window.addEventListener("load", function() {
+
+
+
+    });
+
+</script>

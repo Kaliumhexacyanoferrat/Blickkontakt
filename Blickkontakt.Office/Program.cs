@@ -12,5 +12,7 @@ return Host.Create()
            .Handler(project)
            .Console()
            .Defaults(secureUpgrade: false, strictTransport: false)
+#if DEBUG
            .Development()
+#endif
            .Run();
