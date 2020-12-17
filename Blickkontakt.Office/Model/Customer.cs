@@ -6,6 +6,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Blickkontakt.Office.Model
 {
 
+    #region Fields
+
+    public enum Saluation : short
+    {
+        None = 0,
+        Female = 1,
+        Male = 2
+    }
+
+    #endregion
+
     [Table("customer")]
     public class Customer
     {
@@ -23,6 +34,12 @@ namespace Blickkontakt.Office.Model
         [Column("first_name")]
         public string FirstName { get; set; }
 
+        [Column("title")]
+        public string Title { get; set; }
+
+        [Column("salutation")]
+        public Saluation Salutation { get; set; }
+
         [Column("mail")]
         public string Mail { get; set; }
 
@@ -37,6 +54,9 @@ namespace Blickkontakt.Office.Model
 
         [Column("zip")]
         public string Zip { get; set; }
+
+        [Column("notes")]
+        public string Notes { get; set; }
 
         [Column("created")]
         public DateTime Created { get; set; }

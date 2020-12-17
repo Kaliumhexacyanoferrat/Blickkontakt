@@ -2,7 +2,7 @@
 
     <form novalidate="novalidate" id="editor" method="post" action=".">
 
-        <div class="row">
+        <div class="row row-margin">
 
             <div class="col-md-6">
 
@@ -22,23 +22,41 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label">Name</label>
+                            <label for="salutation" class="col-sm-2 col-form-label">Anrede</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="@Model.Data.Name">
+                                <select class="form-control" name="salutation" id="salutation">
+                                    <option value="0" @{ if ((int)Model.Data.Salutation == 0) <text> selected</text> }>Keine</option>
+                                    <option value="1" @{ if ((int)Model.Data.Salutation == 1) <text> selected</text> }>Frau</option>
+                                    <option value="2" @{ if ((int)Model.Data.Salutation == 2) <text> selected</text> }>Herr</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="title" class="col-sm-2 col-form-label">Titel</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Prof. Dr." value="@Model.Data.Title">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="firstName" class="col-sm-2 col-form-label">Vorname</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Vorname" value="@Model.Data.FirstName">
+                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Max" value="@Model.Data.FirstName">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Mustermann" value="@Model.Data.Name">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="mail" class="col-sm-2 col-form-label">E-Mail</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="mail" name="mail" placeholder="vorname.nachname@gmail.com" value="@Model.Data.Mail">
+                                <input type="text" class="form-control" id="mail" name="mail" placeholder="max.mustermann@web.de" value="@Model.Data.Mail">
                             </div>
                         </div>
 
@@ -46,6 +64,13 @@
                             <label for="phone" class="col-sm-2 col-form-label">Telefon</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="phone" name="phone" placeholder="07171 75849" value="@Model.Data.Phone">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="notes" class="col-sm-2 col-form-label">Notizen</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="notes" name="notes" placeholder="Notizen zum Kunden" rows="5">@Model.Data.Notes</textarea>
                             </div>
                         </div>
 
@@ -98,11 +123,11 @@
 
         <div class="row justify-content-end">
 
-            <div class="col-2">
+            <div class="col-auto">
                 <button class="btn btn-block btn-primary">Speichern</button>
             </div>
 
-            <div class="col-2">
+            <div class="col-auto">
                 <a href="../../details/@Model.Data.Number/" class="btn btn-block btn-outline-primary">Abbrechen</a>
             </div>
 

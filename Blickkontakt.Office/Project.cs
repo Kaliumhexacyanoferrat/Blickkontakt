@@ -52,7 +52,8 @@ namespace Blickkontakt.Office
                           .Theme(theme)
                           .Content(content)
                           .Menu(menu)
-                          .AddScript("jquery-validate.js", Resource.FromAssembly("jquery.validate.min.js"));
+                          .AddScript("jquery-validate.js", Resource.FromAssembly("jquery.validate.min.js"))
+                          .AddStyle("project.css", Resource.FromAssembly("project.css"));
         }
 
         private static UserProfile? RenderUser(IRequest request, IHandler handler)

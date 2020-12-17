@@ -1,13 +1,12 @@
 ﻿<section class="content">
 
+    <div class="row row-margin justify-content-end">
 
-    <div class="row justify-content-end">
-
-        <div class="col-2">
+        <div class="col-auto">
             <a href="../../edit/@Model.Data.Number/" class="btn btn-block btn-outline-primary">Bearbeiten</a>
         </div>
 
-        <div class="col-2">
+        <div class="col-auto">
             <a href="../../delete/@Model.Data.Number/" class="btn btn-block btn-outline-danger">Löschen</a>
         </div>
 
@@ -31,13 +30,43 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="name" class="col-sm-2 col-form-label">Name</label>
-                        <div class="col-sm-10 form-control" id="name">@Model.Data.Name</div>
+                        <label for="salutation" class="col-sm-2 col-form-label">Anrede</label>
+                        <div class="col-sm-10 form-control" id="salutation">
+                            @{
+
+                                switch (Model.Data.Salutation.ToString())
+                                {
+                                    case "Female":
+                                        <text>Frau</text>
+                                        break;
+
+                                    case "Male":
+                                        <text>Herr</text>
+                                        break;
+
+                                    default:
+                                        <text>Keine</text>
+                                        break;
+
+                                }
+
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="title" class="col-sm-2 col-form-label">Titel</label>
+                        <div class="col-sm-10 form-control" id="title">@Model.Data.Title</div>
                     </div>
 
                     <div class="form-group row">
                         <label for="firstName" class="col-sm-2 col-form-label">Vorname</label>
                         <div class="col-sm-10 form-control" id="firstName">@Model.Data.FirstName</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10 form-control" id="name">@Model.Data.Name</div>
                     </div>
 
                     <div class="form-group row">
@@ -48,6 +77,11 @@
                     <div class="form-group row">
                         <label for="phone" class="col-sm-2 col-form-label">Telefon</label>
                         <div class="col-sm-10 form-control" id="phone">@Model.Data.Phone</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="notes" class="col-sm-2 col-form-label">Notizen</label>
+                        <div class="col-sm-10 form-control" style="height: auto" id="notes">@Model.Data.Notes</div>
                     </div>
 
                 </div>

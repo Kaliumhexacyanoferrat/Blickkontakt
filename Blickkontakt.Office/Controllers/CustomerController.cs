@@ -92,7 +92,7 @@ namespace Blickkontakt.Office.Controllers
             }
 
             return ModRazor.Page(Resource.FromAssembly("Customer.Details.cshtml"), (r, h) => new ViewModel<Customer>(r, h, customer))
-                           .Title($"{customer.FirstName} {customer.Name}");
+                           .Title($"{customer.Title} {customer.FirstName} {customer.Name}");
         }
 
         public IHandlerBuilder? Edit([FromPath] int number)
@@ -128,13 +128,16 @@ namespace Blickkontakt.Office.Controllers
 
             existing.Number = customer.Number;
 
-            existing.Name = customer.Name;
+            existing.Name = customer.Name.Trim();
             existing.FirstName = OrNull(customer.FirstName);
+            existing.Salutation = customer.Salutation;
+            existing.Title = OrNull(customer.Title);
             existing.Phone = OrNull(customer.Phone);
             existing.Mail = OrNull(customer.Mail);
             existing.Street = OrNull(customer.Street);
             existing.Zip = OrNull(customer.Zip);
             existing.City = OrNull(customer.City);
+            existing.Notes = OrNull(customer.Notes);
 
             existing.Modified = DateTime.UtcNow;
 
@@ -165,7 +168,7 @@ namespace Blickkontakt.Office.Controllers
 
         private static string? OrNull(string? value)
         {
-            return (!string.IsNullOrWhiteSpace(value)) ? value : null;
+            return (!string.IsNullOrWhiteSpace(value)) ? value.Trim() : null;
         }
 
     }
