@@ -52,6 +52,8 @@ namespace Blickkontakt.Office.Model
 
         public DbSet<Customer> Customers { get; set; }
 
+        public DbSet<Announce> Announces { get; set; }
+
         #endregion
 
 

@@ -47,7 +47,7 @@ namespace Blickkontakt.Office.Controllers
 
         public IHandlerBuilder Create()
         {
-            return ModRazor.Page(Resource.FromAssembly("Customer.Creation.cshtml"))
+            return ModRazor.Page(Resource.FromAssembly("Customer.Create.cshtml"))
                            .Title("Kunden anlegen");
         }
 
@@ -63,10 +63,7 @@ namespace Blickkontakt.Office.Controllers
                 customer.Number = (highest != null) ? highest.Value + 1 : START_NUMBER;
             }
 
-            if (string.IsNullOrWhiteSpace(customer.FirstName))
-            {
-                customer.FirstName = null;
-            }
+            customer.FirstName = OrNull(customer.FirstName);
 
             customer.Created = DateTime.UtcNow;
             customer.Modified = DateTime.UtcNow;

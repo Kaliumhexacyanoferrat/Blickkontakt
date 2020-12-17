@@ -54,6 +54,30 @@ CREATE INDEX ix_customer_created
 CREATE INDEX ix_customer_modified
     ON customer (modified DESC);
 
+-- ANNOUNCE
+
+CREATE TABLE announce
+(
+    id           SERIAL       NOT NULL,
+    number       INT          NOT NULL,
+    customer     INT          NOT NULL,
+    notes        TEXT         NULL,
+    title        VARCHAR(255) NULL,
+    message      TEXT         NULL,
+    created      TIMESTAMP    NOT NULL,
+    modified     TIMESTAMP    NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX ux_announce_number
+    ON announce (number);
+    
+CREATE INDEX ix_announce_customer
+    ON announce (customer);
+
+ALTER TABLE announce
+    ADD CONSTRAINT fk_announce_customer FOREIGN KEY (customer) REFERENCES customer (id) ON DELETE CASCADE;
+
 -- ADD DEFAULT DATA
 
 INSERT INTO account (name, display_name, password, is_admin, created, modified) VALUES

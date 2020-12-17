@@ -17,8 +17,11 @@
     <None Remove="Schema\V1_0_0_0__Baseline.sql" />
     <None Remove="Scripts\jquery.validate.min.js" />
     <None Remove="Styles\project.css" />
+    <None Remove="Views\Announce\Create.cshtml" />
+    <None Remove="Views\Announce\Details.cshtml" />
+    <None Remove="Views\Announce\List.cshtml" />
     <None Remove="Views\CustomerList.cshtml" />
-    <None Remove="Views\Customer\Creation.cshtml" />
+    <None Remove="Views\Customer\Create.cshtml" />
     <None Remove="Views\Customer\Details.cshtml" />
     <None Remove="Views\Customer\Editor.cshtml" />
     <None Remove="Views\Dashboard\Dashboard.cshtml" />
@@ -35,13 +38,20 @@
     <EmbeddedResource Include="Resources\user.png" />
     <EmbeddedResource Include="Scripts\jquery.validate.min.js" />
     <EmbeddedResource Include="Styles\project.css" />
+    <EmbeddedResource Include="Views\Announce\Create.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Announce\Details.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Announce\List.cshtml" />
     <EmbeddedResource Include="Views\Customer\Editor.cshtml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Customer\Details.cshtml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Customer\Creation.cshtml">
+    <EmbeddedResource Include="Views\Customer\Create.cshtml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Customer\List.cshtml" />
