@@ -1,0 +1,305 @@
+﻿@{ 
+    var letter = Model.Data.Letter;
+    var announces = Model.Data.Announces;
+    var available = Model.Data.AvailableAnnounces;
+}
+
+<section class="content">
+
+    <div class="row row-margin justify-content-end">
+
+        @if ((int)letter.Status == 0)
+        {
+            <div class="col-auto">
+                <a href="../../publish/@letter.ID/" class="btn btn-block btn-outline-success">Veröffentlichen</a>
+            </div>
+        }
+
+        <div class="col-auto">
+            <a href="../../edit/@letter.ID/" class="btn btn-block btn-outline-primary">Bearbeiten</a>
+        </div>
+
+        @if ((int)letter.Status == 0)
+        {
+            <div class="col-auto">
+                <a href="../../delete/@letter.ID/" class="btn btn-block btn-outline-danger">Löschen</a>
+            </div>
+        }
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="card">
+
+                <div class="card-header">
+                    <h3 class="card-title">Stammdaten</h3>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="form-group row justify-content-start">
+                        <label for="title" class="col-lg-1 col-2 col-form-label">Titel</label>
+                        <div class="col-lg-4 col-3 form-control">@letter.Title</div>
+                    </div>
+
+                    <div class="form-group row justify-content-start">
+                        <label for="title" class="col-lg-1 col-2 col-form-label">Status</label>
+                        <div class="col-lg-4 col-3 form-control">
+                            @{
+                                switch ((int)letter.Status)
+                                {
+                                    case 0:
+                                        <span class="badge badge-info">Unveröffentlicht</span>
+                                        break;
+                                    case 1:
+                                        <span class="badge badge-success">Veröffentlicht</span>
+                                        break;
+                                }
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    @if ((int)letter.Status == 0)
+    {
+
+        <div class="row row-margin">
+
+            <div class="col-md-12">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h3 class="card-title">Verfügbare Anzeigen</h3>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col-sm-12 table-responsive">
+
+                                <form action="/letters/add-announces/@letter.ID/" method="post">
+
+                                    <div class="row row-margin">
+
+                                        <div class="col-12">
+
+                                            <table class="table table-bordered table-striped table-hover">
+
+                                                <thead class="thead-light">
+                                                    <tr role="row">
+                                                        <th>#</th>
+                                                        <th>Nummer</th>
+                                                        <th>Status</th>
+                                                        <th>Titel</th>
+                                                        <th>Kunde</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    @foreach (var c in available)
+                                                    {
+                                                        <tr data-id="@c.Number" class="record">
+                                                            <td>
+                                                                <input type="checkbox" value="1" id="a_@c.Number" name="a_@c.Number" />
+                                                            </td>
+                                                            <td scope="row">
+                                                                <a href="/announces/details/@c.Number/">@c.Number</a>
+                                                            </td>
+                                                            <td>
+                                                                @{
+                                                                    switch ((int)c.Status)
+                                                                    {
+                                                                        case 0:
+                                                                            <span class="badge badge-info">Neu</span>
+                                                                            break;
+                                                                        case 1:
+                                                                            <span class="badge badge-primary">Vorbereitet</span>
+                                                                            break;
+                                                                        case 2:
+                                                                            <span class="badge badge-success">Veröffentlicht</span>
+                                                                            break;
+                                                                        case 3:
+                                                                            <span class="badge badge-secondary">Ausgelaufen</span>
+                                                                            break;
+                                                                        case 4:
+                                                                            <span class="badge badge-warning">Zurückgezogen</span>
+                                                                            break;
+                                                                    }
+                                                                }
+                                                            </td>
+                                                            <td>@c.Title</td>
+                                                            <td>
+                                                                <a href="/customers/details/@c.Customer.Number/">
+                                                                    @c.Customer.Title
+                                                                    @c.Customer.FirstName
+                                                                    @c.Customer.Name
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+
+                                            </table>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row justify-content-end">
+
+                                        <div class="col-auto">
+
+                                            <button class="btn btn-block btn-outline-primary">Auswahl hinzufügen</button>
+
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        
+        <div class="row row-margin">
+
+            <div class="col-md-12">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h3 class="card-title">Anzeigen</h3>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col-sm-12 table-responsive">
+
+                                <form action="/letters/remove-announces/@letter.ID/" method="post">
+
+                                    <div class="row row-margin">
+
+                                        <div class="col-12">
+
+                                            <table class="table table-bordered table-striped table-hover">
+
+                                                <thead class="thead-light">
+                                                    <tr role="row">
+                                                        <th>#</th>
+                                                        <th>Nummer</th>
+                                                        <th>Status</th>
+                                                        <th>Titel</th>
+                                                        <th>Kunde</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    @foreach (var c in announces)
+                                                    {
+                                                        <tr data-id="@c.Number" class="record">
+                                                            <td>
+                                                                <input type="checkbox" value="1" id="a_@c.Number" name="a_@c.Number" />
+                                                            </td>
+                                                            <td scope="row">
+                                                                <a href="/announces/details/@c.Number/">@c.Number</a>
+                                                            </td>
+                                                            <td>
+                                                                @{
+                                                                    switch ((int)c.Status)
+                                                                    {
+                                                                        case 0:
+                                                                            <span class="badge badge-info">Neu</span>
+                                                                            break;
+                                                                        case 1:
+                                                                            <span class="badge badge-primary">Vorbereitet</span>
+                                                                            break;
+                                                                        case 2:
+                                                                            <span class="badge badge-success">Veröffentlicht</span>
+                                                                            break;
+                                                                        case 3:
+                                                                            <span class="badge badge-secondary">Ausgelaufen</span>
+                                                                            break;
+                                                                        case 4:
+                                                                            <span class="badge badge-warning">Zurückgezogen</span>
+                                                                            break;
+                                                                    }
+                                                                }
+                                                            </td>
+                                                            <td>@c.Title</td>
+                                                            <td>
+                                                                <a href="/customers/details/@c.Customer.Number/">
+                                                                    @c.Customer.Title
+                                                                    @c.Customer.FirstName
+                                                                    @c.Customer.Name
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+
+                                            </table>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row justify-content-end">
+
+                                        <div class="col-auto">
+
+                                            <button class="btn btn-block btn-outline-primary">Auswahl entfernen</button>
+
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    }
+
+</section>
+
+<script>
+
+    window.addEventListener("load", function() {
+
+
+
+    });
+
+</script>

@@ -29,6 +29,9 @@
     <None Remove="Views\Customer\Details.cshtml" />
     <None Remove="Views\Customer\Editor.cshtml" />
     <None Remove="Views\Dashboard\Dashboard.cshtml" />
+    <None Remove="Views\Letter\Create.cshtml" />
+    <None Remove="Views\Letter\Details.cshtml" />
+    <None Remove="Views\Letter\Editor.cshtml" />
     <None Remove="Views\Letter\List.cshtml" />
   </ItemGroup>
 
@@ -71,6 +74,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Customer\List.cshtml" />
     <EmbeddedResource Include="Views\Dashboard\Dashboard.cshtml" />
+    <EmbeddedResource Include="Views\Letter\Create.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Letter\Details.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Letter\Editor.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Letter\List.cshtml" />
   </ItemGroup>
 

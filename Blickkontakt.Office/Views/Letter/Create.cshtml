@@ -1,0 +1,168 @@
+﻿@{ 
+    var announces = Model.Data;
+}
+
+<section class="content">
+
+    <form novalidate="novalidate" id="editor" method="post" action=".">
+
+        <div class="row row-margin">
+
+            <div class="col-md-12">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h3 class="card-title">Stammdaten</h3>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="form-group row justify-content-start">
+                            <label for="title" class="col-lg-1 col-2 col-form-label">Titel</label>
+                            <div class="col-lg-4 col-3">
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Dezember 2020">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row row-margin">
+
+            <div class="col-md-12">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h3 class="card-title">Anzeigen</h3>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col-sm-12 table-responsive">
+
+                                <table class="table table-bordered table-striped table-hover">
+
+                                    <thead class="thead-light">
+                                        <tr role="row">
+                                            <th>#</th>
+                                            <th>Nummer</th>
+                                            <th>Status</th>
+                                            <th>Titel</th>
+                                            <th>Kunde</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var c in announces)
+                                        {
+                                            <tr data-id="@c.Number" class="record">
+                                                <td>
+                                                    <input type="checkbox" value="1" id="a_@c.Number" name="a_@c.Number" checked />
+                                                </td>
+                                                <td scope="row">
+                                                    <a href="/announces/details/@c.Number/">@c.Number</a>
+                                                </td>
+                                                <td>
+                                                    @{
+                                                        switch ((int)c.Status)
+                                                        {
+                                                            case 0:
+                                                                <span class="badge badge-info">Neu</span>
+                                                                break;
+                                                            case 1:
+                                                                <span class="badge badge-primary">Vorbereitet</span>
+                                                                break;
+                                                            case 2:
+                                                                <span class="badge badge-success">Veröffentlicht</span>
+                                                                break;
+                                                            case 3:
+                                                                <span class="badge badge-secondary">Ausgelaufen</span>
+                                                                break;
+                                                            case 4:
+                                                                <span class="badge badge-warning">Zurückgezogen</span>
+                                                                break;
+                                                        }
+                                                    }
+                                                </td>
+                                                <td>@c.Title</td>
+                                                <td>
+                                                    <a href="/customers/details/@c.Customer.Number/">
+                                                        @c.Customer.Title
+                                                        @c.Customer.FirstName
+                                                        @c.Customer.Name
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row justify-content-end">
+
+            <div class="col-auto">
+                <button class="btn btn-block btn-primary">Speichern</button>
+            </div>
+
+            <div class="col-auto">
+                <a href="../" class="btn btn-block btn-outline-primary">Abbrechen</a>
+            </div>
+
+        </div>
+
+    </form>
+
+</section>
+
+<script>
+
+    window.addEventListener("load", function() {
+
+        $('#editor').validate({
+            rules: {
+                title: {
+                    required: true
+                }
+            },
+            messages: {
+                title: {
+                    required: "Bitte geben Sie dem Infobrief einen sprechenden Namen"
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.col-3').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+
+    });
+
+</script>

@@ -1,0 +1,82 @@
+﻿@{ 
+    var letter = Model.Data;
+}
+
+<section class="content">
+
+    <form novalidate="novalidate" id="editor" method="post" action=".">
+
+        <div class="row row-margin">
+
+                <div class="col-md-12">
+
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h3 class="card-title">Stammdaten</h3>
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="form-group row justify-content-start">
+                                <label for="title" class="col-lg-1 col-2 col-form-label">Titel</label>
+                                <div class="col-lg-4 col-3">
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="Dezember 2020" value="@letter.Title">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+        </div>
+
+        <div class="row justify-content-end">
+
+            <div class="col-auto">
+                <button class="btn btn-block btn-primary">Speichern</button>
+            </div>
+
+            <div class="col-auto">
+                <a href="../../details/@letter.ID/" class="btn btn-block btn-outline-primary">Abbrechen</a>
+            </div>
+
+        </div>
+
+    </form>
+
+</section>
+
+<script>
+
+    window.addEventListener("load", function() {
+
+        $('#editor').validate({
+            rules: {
+                title: {
+                    required: true
+                }
+            },
+            messages: {
+                title: {
+                    required: "Bitte geben Sie dem Infobrief einen sprechenden Namen"
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.col-sm-10').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+
+    });
+
+</script>
