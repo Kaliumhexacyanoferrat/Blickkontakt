@@ -86,6 +86,48 @@ CREATE INDEX ix_announce_status
 ALTER TABLE announce
     ADD CONSTRAINT fk_announce_customer FOREIGN KEY (customer) REFERENCES customer (id) ON DELETE CASCADE;
 
+-- LETTER
+
+CREATE TABLE letter
+(
+    id           SERIAL       NOT NULL,
+    title        VARCHAR(255) NULL,
+    status       SMALLINT     NOT NULL,
+    published    TIMESTAMP    NULL,
+    created      TIMESTAMP    NOT NULL,
+    modified     TIMESTAMP    NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE INDEX ix_letter_status
+    ON letter (status);
+
+CREATE INDEX ix_letter_created
+    ON letter (created DESC);
+
+-- LETTER ANNOUNCE
+
+CREATE TABLE letter_announce
+(
+    id           SERIAL       NOT NULL,
+    letter       INT          NOT NULL,
+    announce     INT          NOT NULL,
+    "order"      SMALLINT     NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX ux_letter_announce_unique_announces
+    ON letter_announce (letter, announce);
+    
+CREATE UNIQUE INDEX ux_letter_announce_unique_order
+    ON letter_announce (letter, "order");
+
+ALTER TABLE letter_announce
+    ADD CONSTRAINT fk_letter_announce_letter FOREIGN KEY (letter) REFERENCES letter (id) ON DELETE CASCADE;
+
+ALTER TABLE letter_announce
+    ADD CONSTRAINT fk_letter_announce_announce FOREIGN KEY (announce) REFERENCES announce (id) ON DELETE CASCADE;
+
 -- ADD DEFAULT DATA
 
 INSERT INTO account (name, display_name, password, is_admin, is_active, created, modified) VALUES

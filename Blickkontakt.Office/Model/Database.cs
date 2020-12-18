@@ -48,11 +48,15 @@ namespace Blickkontakt.Office.Model
 
         #region Entities
 
-        public DbSet<Account> Users { get; set; }
+        public DbSet<Account> Accounts { get; set; }
 
         public DbSet<Customer> Customers { get; set; }
 
         public DbSet<Announce> Announces { get; set; }
+
+        public DbSet<Letter> Letters { get; set; }
+
+        public DbSet<LetterAnnounce> LetterAnnounces { get; set; }
 
         #endregion
 

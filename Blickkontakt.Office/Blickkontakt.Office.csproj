@@ -29,6 +29,7 @@
     <None Remove="Views\Customer\Details.cshtml" />
     <None Remove="Views\Customer\Editor.cshtml" />
     <None Remove="Views\Dashboard\Dashboard.cshtml" />
+    <None Remove="Views\Letter\List.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -70,6 +71,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Customer\List.cshtml" />
     <EmbeddedResource Include="Views\Dashboard\Dashboard.cshtml" />
+    <EmbeddedResource Include="Views\Letter\List.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

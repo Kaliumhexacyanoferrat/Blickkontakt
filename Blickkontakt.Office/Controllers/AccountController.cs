@@ -34,7 +34,7 @@ namespace Blickkontakt.Office.Controllers
 
             using var context = Database.Create();
 
-            IQueryable<Account> query = context.Users;
+            IQueryable<Account> query = context.Accounts;
 
             if (!inactive)
             {
@@ -79,7 +79,7 @@ namespace Blickkontakt.Office.Controllers
             account.Created = DateTime.UtcNow;
             account.Modified = DateTime.UtcNow;
 
-            context.Users.Add(account);
+            context.Accounts.Add(account);
 
             context.SaveChanges();
 
@@ -92,7 +92,7 @@ namespace Blickkontakt.Office.Controllers
 
             using var context = Database.Create();
 
-            var account = context.Users
+            var account = context.Accounts
                                  .Where(c => c.ID == id)
                                  .FirstOrDefault();
 
@@ -118,7 +118,7 @@ namespace Blickkontakt.Office.Controllers
 
             using var context = Database.Create();
 
-            var account = context.Users
+            var account = context.Accounts
                                   .Where(c => c.ID == id)
                                   .FirstOrDefault();
 
@@ -145,7 +145,7 @@ namespace Blickkontakt.Office.Controllers
 
             using var context = Database.Create();
 
-            var existing = context.Users
+            var existing = context.Accounts
                                   .Where(c => c.ID == id)
                                   .FirstOrDefault();
 
@@ -185,7 +185,7 @@ namespace Blickkontakt.Office.Controllers
 
             using var context = Database.Create();
 
-            var account = context.Users
+            var account = context.Accounts
                                  .Where(c => c.ID == id)
                                  .FirstOrDefault();
 
@@ -212,7 +212,7 @@ namespace Blickkontakt.Office.Controllers
 
             using var context = Database.Create();
 
-            var account = context.Users
+            var account = context.Accounts
                                  .Where(c => c.ID == id)
                                  .FirstOrDefault();
 

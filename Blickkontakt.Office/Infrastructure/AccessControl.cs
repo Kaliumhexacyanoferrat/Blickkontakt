@@ -23,7 +23,7 @@ namespace Blickkontakt.Office.Infrastructure
 
             using var context = Database.Create();
 
-            var query = from u in context.Users
+            var query = from u in context.Accounts
                         where u.Name == username
                         select u;
 

@@ -45,7 +45,7 @@ namespace Blickkontakt.Office
                            .Add("{website}", "Übersicht")
                            .Add("/customers/", "Kunden")
                            .Add("/announces/", "Anzeigen")
-                           .Add("/letters/", "Infobrief")
+                           .Add("/letters/", "Infobriefe")
                            .Add("/accounts/", "Mitarbeiter");
 
             return Website.Create()

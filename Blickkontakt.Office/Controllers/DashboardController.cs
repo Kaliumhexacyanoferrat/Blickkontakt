@@ -30,7 +30,7 @@ namespace Blickkontakt.Office.Controllers
                 AnnouncesToPrepare: context.Announces.Where(a => a.Status == AnnounceStatus.New).Count(),
                 AnnouncesToPublish: context.Announces.Where(a => a.Status == AnnounceStatus.Prepared).Count(),
                 ActiveAnnounces: context.Announces.Where(a => a.Status == AnnounceStatus.Published).Count(),
-                ActiveAccounts: context.Users.Where(a => a.Active).Count()
+                ActiveAccounts: context.Accounts.Where(a => a.Active).Count()
             );
 
             return ModRazor.Page(Resource.FromAssembly("Dashboard.cshtml"), (r, h) => new ViewModel<DashboardViewModel>(r, h, model))
