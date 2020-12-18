@@ -26,7 +26,9 @@
                                 <thead class="thead-light">
                                     <tr role="row">
                                         <th>Nummer</th>
+                                        <th>Status</th>
                                         <th>Kunde</th>
+                                        <th>Titel</th>
                                         <th>Erstellt</th>
                                     </tr>
                                 </thead>
@@ -37,10 +39,33 @@
                                         <tr data-id="@c.Number" class="record" style="cursor: pointer;">
                                             <td scope="row">@c.Number</td>
                                             <td>
+                                                @{
+                                                    switch ((int)c.Status)
+                                                    {
+                                                        case 0:
+                                                            <span class="badge badge-info">Neu</span>
+                                                            break;
+                                                        case 1:
+                                                            <span class="badge badge-primary">Vorbereitet</span>
+                                                            break;
+                                                        case 2:
+                                                            <span class="badge badge-success">Veröffentlicht</span>
+                                                            break;
+                                                        case 3:
+                                                            <span class="badge badge-secondary">Ausgelaufen</span>
+                                                            break;
+                                                        case 4:
+                                                            <span class="badge badge-warning">Zurückgezogen</span>
+                                                            break;
+                                                    }
+                                                }
+                                            </td>
+                                            <td>
                                                 @c.Customer.Title
                                                 @c.Customer.FirstName
                                                 @c.Customer.Name
                                             </td>
+                                            <td>@c.Title</td>
                                             <td>@c.Created.ToLocalTime()</td>
                                         </tr>
                                     }

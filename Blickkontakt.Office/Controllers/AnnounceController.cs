@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Linq;
 
-using Blickkontakt.Office.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+
 using Blickkontakt.Office.Model;
 using Blickkontakt.Office.ViewModels;
 
 using GenHTTP.Api.Content;
 using GenHTTP.Api.Content.Templating;
 using GenHTTP.Api.Protocol;
-using GenHTTP.Modules.Authentication;
+
 using GenHTTP.Modules.Basics;
 using GenHTTP.Modules.Controllers;
 using GenHTTP.Modules.IO;
 using GenHTTP.Modules.Razor;
-using Microsoft.EntityFrameworkCore;
 
 namespace Blickkontakt.Office.Controllers
 {
@@ -83,7 +83,7 @@ namespace Blickkontakt.Office.Controllers
         }
 
         [ControllerAction(RequestMethod.POST)]
-        public IHandlerBuilder? Create([FromPath] int number, Announce announce, IRequest request)
+        public IHandlerBuilder? Create([FromPath] int number, Announce announce)
         {
             using var context = Database.Create();
 
@@ -104,6 +104,7 @@ namespace Blickkontakt.Office.Controllers
             }
 
             announce.Customer = customer;
+            announce.Status = AnnounceStatus.New;
 
             announce.Notes = OrNull(announce.Notes);
             announce.Message = OrNull(announce.Message);
@@ -117,6 +118,27 @@ namespace Blickkontakt.Office.Controllers
             context.SaveChanges();
 
             return Redirect.To($"/announces/details/{announce.Number}/", true);
+        }
+
+        public IHandlerBuilder? Prepare([FromPath] int number)
+        {
+            using var context = Database.Create();
+
+            var announce = context.Announces
+                                  .Include(a => a.Customer)
+                                  .Where(c => c.Number == number)
+                                  .FirstOrDefault();
+
+            if (announce == null)
+            {
+                return null;
+            }
+
+            announce.Status = AnnounceStatus.Prepared;
+
+            context.SaveChanges();
+
+            return Redirect.To("/announces/", true);
         }
 
         private static string? OrNull(string? value)

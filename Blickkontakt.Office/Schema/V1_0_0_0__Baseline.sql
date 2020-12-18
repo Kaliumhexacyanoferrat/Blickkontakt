@@ -61,6 +61,7 @@ CREATE TABLE announce
     id           SERIAL       NOT NULL,
     number       INT          NOT NULL,
     customer     INT          NOT NULL,
+    status       SMALLINT     NOT NULL,
     notes        TEXT         NULL,
     title        VARCHAR(255) NULL,
     message      TEXT         NULL,
@@ -74,6 +75,9 @@ CREATE UNIQUE INDEX ux_announce_number
     
 CREATE INDEX ix_announce_customer
     ON announce (customer);
+
+CREATE INDEX ix_announce_status
+    ON announce (status);
 
 ALTER TABLE announce
     ADD CONSTRAINT fk_announce_customer FOREIGN KEY (customer) REFERENCES customer (id) ON DELETE CASCADE;
