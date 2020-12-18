@@ -23,6 +23,7 @@
     <None Remove="Views\Account\List.cshtml" />
     <None Remove="Views\Announce\Create.cshtml" />
     <None Remove="Views\Announce\Details.cshtml" />
+    <None Remove="Views\Announce\Editor.cshtml" />
     <None Remove="Views\Announce\List.cshtml" />
     <None Remove="Views\CustomerList.cshtml" />
     <None Remove="Views\Customer\Create.cshtml" />
@@ -60,6 +61,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Announce\Details.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Announce\Editor.cshtml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Announce\List.cshtml" />

@@ -150,6 +150,91 @@ namespace Blickkontakt.Office.Controllers
             return Redirect.To("/announces/", true);
         }
 
+        public IHandlerBuilder? Withdraw([FromPath] int number)
+        {
+            using var context = Database.Create();
+
+            var announce = context.Announces
+                                  .Include(a => a.Customer)
+                                  .Where(c => c.Number == number)
+                                  .FirstOrDefault();
+
+            if (announce == null)
+            {
+                return null;
+            }
+
+            announce.Status = AnnounceStatus.Withdrawn;
+
+            context.SaveChanges();
+
+            return Redirect.To($"/announces/details/{number}/", true);
+        }
+
+        public IHandlerBuilder? ReActivate([FromPath] int number)
+        {
+            using var context = Database.Create();
+
+            var announce = context.Announces
+                                  .Where(c => c.Number == number)
+                                  .FirstOrDefault();
+
+            if (announce == null)
+            {
+                return null;
+            }
+
+            // ToDo: Or Expired?
+            announce.Status = AnnounceStatus.Published;
+
+            context.SaveChanges();
+
+            return Redirect.To($"/announces/details/{number}/", true);
+        }
+
+        public IHandlerBuilder? Edit([FromPath] int number)
+        {
+            using var context = Database.Create();
+
+            var announce = context.Announces
+                                  .Include(a => a.Customer)
+                                  .Where(c => c.Number == number)
+                                  .FirstOrDefault();
+
+            if (announce == null)
+            {
+                return null;
+            }
+
+            return ModRazor.Page(Resource.FromAssembly("Announce.Editor.cshtml"), (r, h) => new ViewModel<Announce>(r, h, announce))
+                           .Title($"Anzeige bearbeiten");
+        }
+
+        [ControllerAction(RequestMethod.POST)]
+        public IHandlerBuilder? Edit([FromPath] int number, Announce announce)
+        {
+            using var context = Database.Create();
+
+            var existing = context.Announces
+                                  .Where(c => c.Number == number)
+                                  .FirstOrDefault();
+
+            if (existing == null)
+            {
+                return null;
+            }
+
+            existing.Notes = OrNull(announce.Notes);
+            existing.Title = OrNull(announce.Title);
+            existing.Message = OrNull(announce.Message);
+
+            existing.Modified = DateTime.UtcNow;
+
+            context.SaveChanges();
+
+            return Redirect.To($"/announces/details/{number}/", true);
+        }
+
         private static string? OrNull(string? value)
         {
             return (!string.IsNullOrWhiteSpace(value)) ? value.Trim() : null;

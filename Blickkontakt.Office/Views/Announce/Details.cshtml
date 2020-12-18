@@ -9,6 +9,20 @@
             </div>
         }
 
+        @if ((int)Model.Data.Status == 2 || (int)Model.Data.Status == 3)
+        {
+            <div class="col-auto">
+                <a href="../../withdraw/@Model.Data.Number/" class="btn btn-block btn-outline-warning">Zurückziehen</a>
+            </div>
+        }
+
+        @if ((int)Model.Data.Status == 4)
+        {
+            <div class="col-auto">
+                <a href="../../re-activate/@Model.Data.Number/" class="btn btn-block btn-warning">Zurückziehen</a>
+            </div>
+        }
+
         <div class="col-auto">
             <a href="../../edit/@Model.Data.Number/" class="btn btn-block btn-outline-primary">Bearbeiten</a>
         </div>

@@ -1,0 +1,115 @@
+﻿<section class="content">
+
+    <form novalidate="novalidate" id="editor" method="post" action=".">
+
+        <div class="row row-margin">
+
+            <div class="col-md-6">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h3 class="card-title">Allgemein</h3>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                            <label for="number" class="col-sm-2 col-form-label">Kunde</label>
+                            <div class="col-sm-10 form-control">
+                                <a href="/customers/details/@Model.Data.Customer.Number/">
+                                    @Model.Data.Customer.Title
+                                    @Model.Data.Customer.FirstName
+                                    @Model.Data.Customer.Name
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="status" class="col-sm-2 col-form-label">Status</label>
+                            <div class="col-sm-10 form-control">
+                                @{
+                                    switch ((int)Model.Data.Status)
+                                    {
+                                        case 0:
+                                            <span class="badge badge-info">Neu</span>
+                                            break;
+                                        case 1:
+                                            <span class="badge badge-primary">Vorbereitet</span>
+                                            break;
+                                        case 2:
+                                            <span class="badge badge-success">Veröffentlicht</span>
+                                            break;
+                                        case 3:
+                                            <span class="badge badge-secondary">Ausgelaufen</span>
+                                            break;
+                                        case 4:
+                                            <span class="badge badge-warning">Zurückgezogen</span>
+                                            break;
+                                    }
+                                }
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="notes" class="col-sm-2 col-form-label">Notiz</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="notes" name="notes" placeholder="Notizen zur Anzeige" rows="8">@Model.Data.Notes</textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h3 class="card-title">Anzeigentext</h3>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                            <label for="title" class="col-sm-2 col-form-label">Titel</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Schachspieler gesucht!" value="@Model.Data.Title">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="message" class="col-sm-2 col-form-label">Text</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="message" name="message" placeholder="Geistig jung gebliebener Schachspieler (76), sucht ..." rows="8">@Model.Data.Message</textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="row justify-content-end">
+
+            <div class="col-auto">
+                <button class="btn btn-block btn-primary">Speichern</button>
+            </div>
+
+            <div class="col-auto">
+                <a href="../../details/@Model.Data.Number/" class="btn btn-block btn-outline-primary">Abbrechen</a>
+            </div>
+
+        </div>
+
+    </form>
+
+</section>
