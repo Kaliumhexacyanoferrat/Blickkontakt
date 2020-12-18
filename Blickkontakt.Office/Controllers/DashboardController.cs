@@ -12,7 +12,8 @@ namespace Blickkontakt.Office.Controllers
 
     #region View Models
 
-    public record DashboardViewModel(int Customers);
+    public record DashboardViewModel(int Customers, int AnnouncesToPrepare, int AnnouncesToPublish, int ActiveAnnounces,
+                                     int ActiveAccounts);
 
     #endregion
 
@@ -25,7 +26,11 @@ namespace Blickkontakt.Office.Controllers
 
             var model = new DashboardViewModel
             (
-                Customers: context.Customers.Count()
+                Customers: context.Customers.Count(),
+                AnnouncesToPrepare: context.Announces.Where(a => a.Status == AnnounceStatus.New).Count(),
+                AnnouncesToPublish: context.Announces.Where(a => a.Status == AnnounceStatus.Prepared).Count(),
+                ActiveAnnounces: context.Announces.Where(a => a.Status == AnnounceStatus.Published).Count(),
+                ActiveAccounts: context.Users.Where(a => a.Active).Count()
             );
 
             return ModRazor.Page(Resource.FromAssembly("Dashboard.cshtml"), (r, h) => new ViewModel<DashboardViewModel>(r, h, model))

@@ -7,6 +7,7 @@ CREATE TABLE account
     display_name VARCHAR(255) NOT NULL,
     password     VARCHAR(64)  NOT NULL,
     is_admin     BOOL         NOT NULL,
+    is_active    BOOL         NOT NULL,
     created      TIMESTAMP    NOT NULL,
     modified     TIMESTAMP    NOT NULL,
     PRIMARY KEY (id)
@@ -17,6 +18,9 @@ CREATE UNIQUE INDEX ux_account_name
 
 CREATE INDEX ix_account_is_admin
     ON account (is_admin);
+
+CREATE INDEX ix_account_is_active
+    ON account (is_active);
 
 -- CUSTOMER
 
@@ -84,8 +88,5 @@ ALTER TABLE announce
 
 -- ADD DEFAULT DATA
 
-INSERT INTO account (name, display_name, password, is_admin, created, modified) VALUES
-                    ('admin', 'Administrator', 'c0afd7866ce110fd7dbfcc3690e9f20e04d8fc7f3c9b735f4804d2d6631a67c1', '1', now(), now());
-
-INSERT INTO account (name, display_name, password, is_admin, created, modified) VALUES
-                    ('uschi', 'Uschi Nägeli', '72a25eba8b846d8169a8b7bb30fcc2719ee6405a7b4cac9e09629e5e5c8552ef', '1', now(), now());
+INSERT INTO account (name, display_name, password, is_admin, is_active, created, modified) VALUES
+                    ('admin', 'Administrator', 'c0afd7866ce110fd7dbfcc3690e9f20e04d8fc7f3c9b735f4804d2d6631a67c1', '1', '1', now(), now());

@@ -1,0 +1,172 @@
+﻿@{
+    var user = Model.Data.User;
+    var account = Model.Data.Account;
+}
+
+<section class="content">
+
+    <form novalidate="novalidate" id="editor" method="post" action=".">
+
+        <div class="row row-margin">
+
+            <div class="col-md-6">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h3 class="card-title">Stammdaten</h3>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-3 col-form-label">Anmeldename</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="gerda" value="@account.Name">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="displayName" class="col-sm-3 col-form-label">Anzeigename</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="displayName" name="displayName" placeholder="Tante Gerda" value="@account.DisplayName">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-3 col-form-label">Neues Kennwort</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="********">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="passwordConfirmation" class="col-sm-3 col-form-label">Kennwort bestätigen</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="passwordConfirmation" name="passwordConfirmation" placeholder="********">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h3 class="card-title">Berechtigungen</h3>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="form-group row">
+
+                            <label for="role" class="col-sm-2 col-form-label">Rolle</label>
+
+                            @if (user.Admin)
+                            {
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="admin" id="admin">
+                                        <option value="0" selected>Regulärer Benutzer</option>
+                                        <option value="1">Administrator</option>
+                                    </select>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-sm-10 form-control">
+                                    @if (account.Admin)
+                                    {
+                                        <span class="badge badge-primary">Administrator</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-info">Benutzer</span>
+                                    }
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="row justify-content-end">
+
+            <div class="col-auto">
+                <button class="btn btn-block btn-primary">Speichern</button>
+            </div>
+
+            <div class="col-auto">
+                <a href="../../details/@account.ID/" class="btn btn-block btn-outline-primary">Abbrechen</a>
+            </div>
+
+        </div>
+
+    </form>
+
+</section>
+
+<script>
+
+    window.addEventListener("load", function () {
+
+        $('#editor').validate({
+            rules: {
+                name: {
+                    required: true
+                },
+                displayName: {
+                    required: true
+                },
+                password: {
+                    required: false,
+                    minlength: 8
+                },
+                passwordConfirmation: {
+                    required: false,
+                    minlength: 8,
+                    equalTo: "#password"
+                }
+            },
+            messages: {
+                name: {
+                    required: "Bitte geben Sie den Anmeldenamen des Mitarbeiters ein"
+                },
+                displayName: {
+                    required: "Bitte geben Sie den Anzeigename des Mitarbeiters ein"
+                },
+                password: {
+                    minlength: "Das Kennwort muss mindestens acht Zeichen lang sein"
+                },
+                passwordConfirmation: {
+                    minlength: "Die Kennwörter stimmen nicht überein",
+                    equalTo: "Die Kennwörter stimmen nicht überein"
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.col-sm-10').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+
+    });
+
+</script>

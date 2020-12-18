@@ -24,20 +24,29 @@ namespace Blickkontakt.Office.Controllers
 
         private const int START_NUMBER = 3000;
 
-        public IHandlerBuilder Index(int page)
+        public IHandlerBuilder Index(int page, string status)
         {
             if (page < 1) page = 1;
 
             using var context = Database.Create();
 
-            var records = context.Announces
-                                 .Include(a => a.Customer)
-                                 .Skip((page - 1) * PAGE_SIZE)
-                                 .Take(PAGE_SIZE)
-                                 .OrderByDescending(c => c.Number)
-                                 .ToList();
+            IQueryable<Announce> query = context.Announces
+                                                .Include(a => a.Customer);
 
-            var total = context.Customers.Count();
+            if (!string.IsNullOrEmpty(status))
+            {
+                if (Enum.TryParse<AnnounceStatus>(status, true, out var announceStatus))
+                {
+                    query = query.Where(a => a.Status == announceStatus);
+                }
+            }
+
+            var total = query.Count();
+
+            var records = query.Skip((page - 1) * PAGE_SIZE)
+                               .Take(PAGE_SIZE)
+                               .OrderByDescending(c => c.Number)
+                               .ToList();
 
             var pages = (total + PAGE_SIZE - 1) / PAGE_SIZE;
 

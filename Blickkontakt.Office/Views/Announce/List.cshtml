@@ -1,10 +1,32 @@
 ﻿
 <section class="content">
 
-    <div class="row row-margin justify-content-start">
+    <div class="row row-margin justify-content-between">
 
         <div class="col-3">
             <input type="search" class="form-control" placeholder="Suche">
+        </div>
+
+        <div class="col-9">
+
+            <div class="row justify-content-end">
+
+                @{ var status = (Model.Request.Query.ContainsKey("status")) ? Model.Request.Query["status"] : null; }
+
+                <div class="col-auto">
+                    @{ var clsNew = (status == "new") ? "btn-info" : "btn-outline-info"; }
+                    @{ var queryNew = (status == "new") ? string.Empty : "?status=new"; }
+                    <a href="@Model.Route($"./{queryNew}")" class="btn btn-block @clsNew">Neu</a>
+                </div>
+
+                <div class="col-auto">
+                    @{ var clsPrepared = (status == "prepared") ? "btn-primary" : "btn-outline-primary"; }
+                    @{ var queryPrepared = (status == "prepared") ? string.Empty : "?status=prepared"; }
+                    <a href="@Model.Route($"./{queryPrepared}")" class="btn btn-block @clsPrepared">Vorbereitet</a>
+                </div>
+
+            </div>
+
         </div>
 
     </div>

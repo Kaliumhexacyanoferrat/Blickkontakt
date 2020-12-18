@@ -1,12 +1,14 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 using GenHTTP.Api.Content.Authentication;
+using GenHTTP.Api.Protocol;
+using GenHTTP.Modules.Authentication;
 
 using Blickkontakt.Office.Model;
+using GenHTTP.Api.Content;
 
 namespace Blickkontakt.Office.Infrastructure
 {
@@ -15,9 +17,9 @@ namespace Blickkontakt.Office.Infrastructure
     {
         private const string SALT = "faa39358-3e18-11eb-b378-0242ac130002";
 
-        public static async ValueTask<IUser?> AuthenticateAsync(string username, string password)
+        public static ValueTask<IUser?> AuthenticateAsync(string username, string password)
         {
-            var hash = await HashAsync(password);
+            var hash = Hash(password);
 
             using var context = Database.Create();
 
@@ -29,22 +31,20 @@ namespace Blickkontakt.Office.Infrastructure
 
             if (found != null)
             {
-                if (found.Password == hash)
+                if (found.Active && (found.Password == hash))
                 {
-                    return new OfficeUser(found);
+                    return new ValueTask<IUser?>(new OfficeUser(found));
                 }
             }
 
-            return null;
+            return new ValueTask<IUser?>();
         }
 
-        private static async ValueTask<string> HashAsync(string value)
+        public static string Hash(string value)
         {
             using var sha256Hash = SHA256.Create();
 
-            using var input = new MemoryStream(Encoding.UTF8.GetBytes(SALT + value));
-
-            var bytes = await sha256Hash.ComputeHashAsync(input);
+            var bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(SALT + value));
 
             var builder = new StringBuilder();
 
@@ -54,6 +54,11 @@ namespace Blickkontakt.Office.Infrastructure
             }
 
             return builder.ToString();
+        }
+
+        public static Account GetAccount(this IRequest request)
+        {
+            return request.GetUser<OfficeUser>()?.User ?? throw new ProviderException(ResponseStatus.Unauthorized, "Unable to retrieve the logged in user");
         }
 
     }

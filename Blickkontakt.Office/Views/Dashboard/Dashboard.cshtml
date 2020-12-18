@@ -1,10 +1,73 @@
 ﻿<section class="content justify-content-start">
-    
-    <div class="row">
 
-        <div class="col-lg-3 col-6">
+    <div class="row row-margin justify-content-start">
 
-            <div class="small-box bg-warning">
+        <div class="col-lg-4 col-6">
+
+            <div class="small-box bg-info">
+
+                <div class="inner">
+                    <h3>@Model.Data.AnnouncesToPrepare</h3>
+                    <p>Vorzubereitende Anzeigen</p>
+                </div>
+
+                <div class="icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+
+                <a href="/announces/?status=new" class="small-box-footer">
+                    Anzeigen vervollständigen <i class="fas fa-arrow-circle-right"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 col-6">
+
+            <div class="small-box bg-primary">
+
+                <div class="inner">
+                    <h3>@Model.Data.AnnouncesToPublish</h3>
+                    <p>Zu veröffentliche Anzeigen</p>
+                </div>
+
+                <div class="icon">
+                    <i class="fas fa-file"></i>
+                </div>
+
+                <a href="/letters/" class="small-box-footer">
+                    Infobrief veröffentlichen <i class="fas fa-arrow-circle-right"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 col-6">
+
+            <div class="small-box bg-success">
+
+                <div class="inner">
+                    <h3>@Model.Data.ActiveAnnounces</h3>
+                    <p>Aktive Anzeigen</p>
+                </div>
+
+                <div class="icon">
+                    <i class="fas fa-file"></i>
+                </div>
+
+                <a href="/letters/" class="small-box-footer">
+                    Infobrief ansehen <i class="fas fa-arrow-circle-right"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 col-6">
+
+            <div class="small-box bg-secondary">
 
                 <div class="inner">
                     <h3>@Model.Data.Customers</h3>
@@ -17,6 +80,27 @@
 
                 <a href="./customers/" class="small-box-footer">
                     Kunden verwalten <i class="fas fa-arrow-circle-right"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 col-6">
+
+            <div class="small-box bg-secondary">
+
+                <div class="inner">
+                    <h3>@Model.Data.ActiveAccounts</h3>
+                    <p>Mitarbeiter</p>
+                </div>
+
+                <div class="icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+
+                <a href="/accounts/" class="small-box-footer">
+                    Mitarbeiter verwalten <i class="fas fa-arrow-circle-right"></i>
                 </a>
 
             </div>

@@ -17,6 +17,10 @@
     <None Remove="Schema\V1_0_0_0__Baseline.sql" />
     <None Remove="Scripts\jquery.validate.min.js" />
     <None Remove="Styles\project.css" />
+    <None Remove="Views\Account\Create.cshtml" />
+    <None Remove="Views\Account\Details.cshtml" />
+    <None Remove="Views\Account\Editor.cshtml" />
+    <None Remove="Views\Account\List.cshtml" />
     <None Remove="Views\Announce\Create.cshtml" />
     <None Remove="Views\Announce\Details.cshtml" />
     <None Remove="Views\Announce\List.cshtml" />
@@ -38,6 +42,16 @@
     <EmbeddedResource Include="Resources\user.png" />
     <EmbeddedResource Include="Scripts\jquery.validate.min.js" />
     <EmbeddedResource Include="Styles\project.css" />
+    <EmbeddedResource Include="Views\Account\Create.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Account\Details.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Account\Editor.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Account\List.cshtml" />
     <EmbeddedResource Include="Views\Announce\Create.cshtml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

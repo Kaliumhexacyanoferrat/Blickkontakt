@@ -1,0 +1,107 @@
+﻿@{ 
+    var user = Model.Data.User;
+    var account = Model.Data.Account;
+}
+
+<section class="content">
+
+    <div class="row row-margin justify-content-end">
+
+        @if (user.Admin || user.ID == account.ID)
+        {
+            <div class="col-auto">
+                <a href="../../edit/@account.ID/" class="btn btn-block btn-outline-primary">Bearbeiten</a>
+            </div>
+        }
+
+        @if (user.Admin)
+        {
+            @if (account.Active)
+            {
+                <div class="col-auto">
+                    <a href="../../deactivate/@account.ID/" class="btn btn-block btn-outline-warning">Inaktiv</a>
+                </div>
+            }
+            else
+            {
+                <div class="col-auto">
+                    <a href="../../activate/@account.ID/" class="btn btn-block btn-warning">Inaktiv</a>
+                </div>
+            }
+        }
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="card">
+
+                <div class="card-header">
+                    <h3 class="card-title">Stammdaten</h3>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-3 col-form-label">Anmeldename</label>
+                        <div class="col-sm-9 form-control">@account.Name</div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="displayName" class="col-sm-3 col-form-label">Anzeigename</label>
+                        <div class="col-sm-9 form-control">@account.DisplayName</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="card">
+
+                <div class="card-header">
+                    <h3 class="card-title">Berechtigungen</h3>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="form-group row">
+                        <label for="role" class="col-sm-2 col-form-label">Rolle</label>
+                        <div class="col-sm-10 form-control">
+                            @if (account.Admin)
+                            {
+                                <span class="badge badge-primary">Administrator</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-info">Benutzer</span>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+
+    window.addEventListener("load", function() {
+
+
+
+    });
+
+</script>

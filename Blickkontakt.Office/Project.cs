@@ -62,7 +62,7 @@ namespace Blickkontakt.Office
 
             if (user != null)
             {
-                return new UserProfile(user.DisplayName, "/static/user.png", $"/users/{user.User.ID}");
+                return new UserProfile(user.DisplayName, "/static/user.png", $"/accounts/details/{user.User.ID}/");
             }
 
             return null;

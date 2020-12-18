@@ -20,6 +20,9 @@ namespace Blickkontakt.Office.Model
         [Column("is_admin")]
         public bool Admin { get; set; }
 
+        [Column("is_active")]
+        public bool Active { get; set; }
+
         [Column("display_name")]
         public string DisplayName { get; set; }
 
