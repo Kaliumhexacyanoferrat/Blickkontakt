@@ -2,6 +2,7 @@
 
 using Blickkontakt.Office.Model;
 
+using EvolveDb;
 using Npgsql;
 
 namespace Blickkontakt.Office.Infrastructure
@@ -14,7 +15,7 @@ namespace Blickkontakt.Office.Infrastructure
         {
             using var connection = new NpgsqlConnection(Database.ConnectionString);
 
-            var evolve = new Evolve.Evolve(connection, msg => Console.WriteLine(msg))
+            var evolve = new Evolve(connection, msg => Console.WriteLine(msg))
             {
                 Locations = new[] { "Schema" },
                 IsEraseDisabled = true
